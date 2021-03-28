@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from multiselectfield import MultiSelectField
+from phonenumber_field.modelfields import PhoneNumberField
 # Create your models here.
 
 unit_choices = [
@@ -32,7 +32,7 @@ class DonationPlaces(models.Model):
     street = models.CharField (max_length=50)
     city = models.CharField (max_length=50)
     state = models.CharField (max_length=50)
-    phone_no = models.PhoneNumberField(unique=True)
+    phone_no = PhoneNumberField(unique=True)
 
 
 
@@ -59,7 +59,7 @@ class Donor (AbstractUser):
     street = models.CharField (max_length=50)
     city = models.CharField (max_length=50)
     state = models.CharField (max_length=50)
-    phone_no = models.PhoneNumberField(unique=True)
+    phone_no = PhoneNumberField(unique=True)
 
     blood_type = models.CharField(choices=unit_choices, max_length=50)
 
