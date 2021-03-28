@@ -1,0 +1,61 @@
+{% extends "donate/layout.html" %}
+
+{% block body %}
+
+    <h2 class="alert alert-info">Register as a Donor</h2>
+
+    {% if message %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endif %}
+
+    <form action="{% url 'registerOption' option='donor' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input class="form-control" autofocus type="text" name="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="email" name="email" placeholder="Email Address">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="firstname" placeholder="Firstname">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="lastname" placeholder="Lastname">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="street" placeholder="Street">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="city" placeholder="City">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="text" name="state" placeholder="State">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="number" name="phone_no" placeholder="Phone Number (Staring with +91)">
+        </div>
+        <select class="form-control" aria-label="Default select example" name="blood_type">
+            <option selected>Select your Blood Group</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+        </select>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+        </div>
+        <input class="btn btn-info" type="submit" value="Register">
+    </form>
+
+    <div class="alert alert-info">
+        Already have an account? <a class="alert-link" href="{% url 'login' %}">Log In here.</a>
+    </div>
+    
+{% endblock %}

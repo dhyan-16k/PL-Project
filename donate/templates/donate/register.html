@@ -1,0 +1,13 @@
+{% extends "donate/layout.html" %}
+
+{% block title %} Login {% endblock %}
+
+{% block body %}
+
+    <h2>Register Options</h2>
+
+    <button class="btn btn-light"><a href="{% url 'registerOption' option='hospital' %}">Register as a Hospital..</a></button> 
+
+    <button  class="btn btn-light"><a href="{% url 'registerOption' option='donor' %}">Register as a Donor..</a></button> 
+
+{% endblock %}
