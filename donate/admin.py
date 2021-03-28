@@ -7,6 +7,10 @@ admin.site.register(DonationPlaces)
 admin.site.register(DonationCamp)
 admin.site.register(BloodBank)
 admin.site.register(BloodUnits)
-admin.site.register(Hospital)
-admin.site.register(Donor)
-admin.site.register(Requests)
+
+#admin.site.register(Hospital)
+#admin.site.register(Donor)
+#admin.site.register(Requests)
+
+admin.site.register(BloodRequests)
+admin.site.register(User)
