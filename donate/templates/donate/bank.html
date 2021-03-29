@@ -1,0 +1,22 @@
+{% extends "donate/layout.html" %}
+{% load static %}
+
+{% block title %}Blood Bank{% endblock %}
+
+{% block body %}
+    <h1>Blood Bank Page</h1>
+    <h2>{{ bank }}</h2><hr>
+
+    <h3>Blood Units Available</h3>
+    <ul>
+        {% for unit in units %}
+            <li>{{ unit.blood_group }} | {{ unit.no_of_units }}</li>
+        {% endfor %}
+    </ul>
+    
+    <hr><h3>Address</h3>
+    
+    {{ bank.dp_no.street }}, {{ bank.dp_no.city }}, {{ bank.dp_no.state }}
+    <h3>Contact Details</h3>
+    Phone No: {{ bank.dp_no.phone_no }}
+{% endblock %}

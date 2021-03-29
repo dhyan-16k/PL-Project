@@ -27,27 +27,45 @@ def index(request):
             "banks": BloodBank.objects.all(),
             "hospitals": User.objects.filter(is_hospital=True)
         })
-
-
+        
 @login_required
-def profile(request):
-    if request.user.is_hospital == False:
-        donations = request.user.donations.all()
+def bank(request, bank_name):
+    if request.user.is_hospital == True:
+        no = DonationPlace.objects.get(name=bank_name)
+        blood_bank = BloodBank.objects.get(dp_no=no)
+        blood_units = BloodUnit.objects.filter(blood_bank=blood_bank)
+        return render(request, "donate/bank.html", {
+            "bank": blood_bank,
+            "units": blood_units
+        })
+    else:
+        return HttpResponseRedirect(reverse(index))
+
+def profile(request, name):
+    user = User.objects.get(username=name)
+    donations = user.donations.all()
     return render(request, "donate/profile.html", {
-        "donations": donations
+        "donations": donations,
+        "user1": user
     })
 
 
 @login_required
 def requests(request):
+    if request.method == 'POST':
+        city = request.user.city
+        req_type = request.POST["blood_req_type"]
+        for donor in User.objects.filter(blood_type=req_type, city=city):
+            BloodRequest.objects.create(hospital=request.user,donor=donor)
+    
     if request.user.is_hospital == True:
         reqs = BloodRequest.objects.filter(hospital=request.user)
     else:
         reqs = BloodRequest.objects.filter(donor=request.user)
-    return render(request, "donate/requests.html", {
-        "reqs": reqs
-    })
 
+    return render(request, "donate/requests.html", {
+            "reqs": reqs
+        })
 
 def login_view(request):
     if request.method == "POST":

@@ -24,7 +24,10 @@
     <h1>Donation Camps</h1>
     <ul>
         {% for camp in camps %}
-            <li>{{ camp }}</li>
+            <li>
+                {{ camp }} | {{ camp.start_date }} - {{ camp.end_date }} |
+                Address : {{ camp.dp_no.street }}, {{ camp.dp_no.city }}, {{ camp.dp_no.state }}
+            </li>
         {% endfor %}
     </ul>
     
@@ -32,7 +35,7 @@
     <h1>Blood Banks</h1>
     <ul>
         {% for bank in banks %}
-            <li>{{ bank }}</li>
+            <li><a href="{% url 'bank' bank_name=bank.dp_no.name %}"> {{ bank }} </a></li>
         {% endfor %}
     </ul>
     
@@ -40,10 +43,8 @@
     <h1>Hospitals</h1>
     <ul>
         {% for hosp in hospitals %}
-            <li> {{ hosp }} </li>
+            <li> <a href="{% url 'profile' name=hosp.username %}"> {{ hosp }} </a></li>
         {% endfor %}
-    </ul>
-    
-    
+    </ul> 
     <hr>
 {% endblock %}

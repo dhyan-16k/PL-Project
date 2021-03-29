@@ -11,12 +11,33 @@
     {% endif %}
     <ul>
         {% for req in reqs %}
-            <li>{{ req }} (Status = {{ req.status }} )</li>
+            <li>
+                <a href="{% url 'profile' name=req.hospital.username %}">{{ req.hospital }}</a> |
+                <a href="{% url 'profile' name=req.donor.username %}">{{ req.donor }}</a> |
+                (Status = {{ req.status }} )
+            </li>
+
         {% endfor %}
     </ul>
-    
+
     {% if user.is_hospital == True %}
-        <button>Make New Request</button>
+        <h2>Make New Request</h2>
+        <hr>Makes a request to all the donors in the city with Particualr Blood Type<hr>
+        <form action="{% url 'requests' %}" method="POST">
+            {% csrf_token %}
+            <select class="form-control" name="blood_req_type" required>
+                <option value="A+">A+</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B-">B-</option>
+                <option value="AB+">AB+</option>
+                <option value="AB-">AB-</option>
+                <option value="O+">O+</option>
+                <option value="O-">O-</option>
+            </select>
+            <input class="btn btn-info" type="submit" value="Make Request">
+        </form>
+        
     {% endif %}
 
 {% endblock %}
