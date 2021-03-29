@@ -22,7 +22,7 @@
                     <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'profile' %}">Signed in as <strong>{{ user }}</strong></a>
+                    <a class="nav-link" href="{% url 'profile' name=user.username %}">Signed in as <strong>{{ user }}</strong></a>
                 </li>
             {% else %}
                 <li class="nav-item">
