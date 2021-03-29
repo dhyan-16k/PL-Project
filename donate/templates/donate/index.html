@@ -2,5 +2,29 @@
 {% load static %}
 
 {% block body %}
-    <h1> Welcome!! </h1>
+    <h1>Donation Camps</h1>
+    <ul>
+        {% for camp in camps %}
+            <li>{{ camp }}</li>
+        {% endfor %}
+    </ul>
+    
+    <hr>
+    <h1>Blood Banks</h1>
+    <ul>
+        {% for bank in banks %}
+            <li>{{ bank }}</li>
+        {% endfor %}
+    </ul>
+    
+    <hr>
+    <h1>Hospitals</h1>
+    <ul>
+        {% for hosp in hospitals %}
+            <li>{{ hosp }}</li>
+        {% endfor %}
+    </ul>
+    
+    
+    <hr>
 {% endblock %}

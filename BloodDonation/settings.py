@@ -121,7 +121,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#AUTH_USER_MODEL = 'donate.Donor'
-#AUTH_USER_MODEL = 'donate.Hospital'
 AUTH_USER_MODEL = 'donate.User'
 

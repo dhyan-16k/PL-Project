@@ -8,7 +8,11 @@ from django.http import HttpResponseRedirect
 # Create your views here.
 
 def index(request):
-    return render(request, "donate/index.html")
+    return render(request, "donate/index.html",{
+        "camps": DonationCamp.objects.all(),
+        "banks": BloodBank.objects.all(),
+        "hospitals": User.objects.filter(is_hospital=False)
+    })
 
 def login_view(request):
     if request.method == "POST":
@@ -17,6 +21,7 @@ def login_view(request):
         username = request.POST["username"]
         password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
+        print(user)
 
         # Check if authentication successful
         if user is not None:
@@ -40,7 +45,7 @@ def registerOption(request, option):
     if request.method == "POST":
         username = request.POST["username"]
         email = request.POST["email"]
-        phoneNo = request.POST["phone_no"]
+        phoneNo = "+91" + request.POST["phone_no"]
         street = request.POST["street"]
         city = request.POST["city"]
         state = request.POST["state"]
