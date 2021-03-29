@@ -11,7 +11,7 @@ def index(request):
     return render(request, "donate/index.html",{
         "camps": DonationCamp.objects.all(),
         "banks": BloodBank.objects.all(),
-        "hospitals": User.objects.filter(is_hospital=False)
+        "hospitals": User.objects.filter(is_hospital=True)
     })
 
 def login_view(request):
