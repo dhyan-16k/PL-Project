@@ -87,7 +87,7 @@ class BloodUnit(models.Model):
     no_of_units = models.IntegerField()
 
     def __str__(self):
-        return f"{self.blood_bank} | {self.blood_group}"
+        return f"{self.blood_bank} | {self.blood_group} | {self.no_of_units}"
 
     class Meta :
         unique_together = ("id", "blood_bank")
