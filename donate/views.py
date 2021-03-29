@@ -8,11 +8,20 @@ from django.http import HttpResponseRedirect
 # Create your views here.
 
 def index(request):
-    return render(request, "donate/index.html",{
-        "camps": DonationCamp.objects.all(),
-        "banks": BloodBank.objects.all(),
-        "hospitals": User.objects.filter(is_hospital=False)
-    })
+    if request.method == 'POST':
+        city = request.POST["search_city"]
+        dp_city = DonationPlace.objects.filter(city=city)
+        return render(request, "donate/index.html",{
+            "camps": DonationCamp.objects.filter(dp_no__in=dp_city),
+            "banks": BloodBank.objects.filter(dp_no__in=dp_city),
+            "hospitals": User.objects.filter(is_hospital=True, city=city)
+        })
+    else:
+        return render(request, "donate/index.html",{
+            "camps": DonationCamp.objects.all(),
+            "banks": BloodBank.objects.all(),
+            "hospitals": User.objects.filter(is_hospital=True)
+        })
 
 def login_view(request):
     if request.method == "POST":
@@ -21,7 +30,6 @@ def login_view(request):
         username = request.POST["username"]
         password = request.POST["password"]
         user = authenticate(request, username=username, password=password)
-        print(user)
 
         # Check if authentication successful
         if user is not None:

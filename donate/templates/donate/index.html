@@ -1,7 +1,25 @@
 {% extends "donate/layout.html" %}
 {% load static %}
 
+{% block title %}Blood Donation{% endblock %}
+
 {% block body %}
+
+    <form action="{% url 'index' %}" method="POST">
+        {% csrf_token %}
+        <select class="form-control" aria-label="Search City" name="search_city">
+            <option selected>Select Your City</option>
+            <option value="Andheri">Andheri</option>
+            <option value="Borivali">Borivali</option>
+            <option value="Dadar">Dadar</option>
+            <option value="Goregaon">Goregaon</option>
+            <option value="Kandivali">Kandivali</option>
+            <option value="Mira Road">Mira Road</option>
+            <option value="Santacruz">Santacruz</option>
+            <option value="Vile Parle">Vile Parle</option> 
+        </select>
+        <button type="submit" class="btn btn-info">Search</button>
+    </form>
     <h1>Donation Camps</h1>
     <ul>
         {% for camp in camps %}

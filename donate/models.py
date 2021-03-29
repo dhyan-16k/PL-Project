@@ -50,7 +50,7 @@ class DonationPlace(models.Model):
     street = models.CharField (max_length=64)
     city = models.CharField (max_length=64)
     state = models.CharField (max_length=64)
-    phone_no = PhoneNumberField()
+    phone_no = PhoneNumberField(unique=True)
     donors = models.ManyToManyField(User, blank=True, related_name="donations")
 
     def __str__(self):
