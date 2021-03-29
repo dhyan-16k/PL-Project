@@ -1,0 +1,25 @@
+
+body {
+    align-items: center;
+    justify-content: center;
+}
+
+.h1title {
+    font-size: 3rem;
+    font-weight: 500;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+h5 {
+    font-size: 2rem;
+}
+
+.link, .link :active, .link:focus, .link:hover  {
+    color: white; 
+}
+.btn-dark {
+    bottom: 20px;
+}

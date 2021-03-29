@@ -1,13 +1,46 @@
 {% extends "donate/layout.html" %}
 
-{% block title %} Login {% endblock %}
+{% load static %}
+
+{% block title %} 
+    Register 
+{% endblock %}
 
 {% block body %}
 
-    <h2>Register Options</h2>
+     <div class="container">
 
-    <button class="btn btn-light"><a href="{% url 'registerOption' option='hospital' %}">Register as a Hospital..</a></button> 
+        <br>
 
-    <button  class="btn btn-light"><a href="{% url 'registerOption' option='donor' %}">Register as a Donor..</a></button> 
+        <h1 class="h1title">Register!</h1>
+        
+        <br>
 
+        <div class="card-deck">
+            <div class="card mb-3" style="min-width: 18rem; max-width: 40rem;">
+                <img class="card-img-top" src="https://image.freepik.com/free-vector/people-walking-sitting-hospital-building-city-clinic-glass-exterior-flat-vector-illustration-medical-help-emergency-architecture-healthcare-concept_74855-10130.jpg">
+                <div class="card-body">
+                    <h5 class="card-title">Register as a Hospital!</h5>
+                    <p class="card-text">Join our large community of hospitals and have the freedom to quickly contact Blood banks and donors 
+                        as per your blood unit needs to increase efficiency and avoide wastage of time.</p>
+                    <button class="btn btn-dark"><a href="{% url 'registerOption' option='hospital' %}" class="link">Register!</a></button>
+                </div>
+            </div>
+
+
+            <div class="card mb-3" style="min-width: 18rem; max-width: 40rem;">
+                <img class="card-img-top" src="https://image.freepik.com/free-vector/illustration-people-donating-blood_52683-22259.jpg">
+                <div class="card-body">
+                    <h5 class="card-title">Register as a Donor!</h5>
+                    <p class="card-text">Join our large community of blood donors and help for a good cause by tracking your donations 
+                        and knowing about blood banks and donation camp details.</p>
+                    <button  class="btn btn-dark"><a href="{% url 'registerOption' option='donor' %}" class="link">Register!</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     
+
+    
 {% endblock %}

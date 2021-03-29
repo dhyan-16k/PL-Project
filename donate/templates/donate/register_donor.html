@@ -11,30 +11,30 @@
     <form action="{% url 'registerOption' option='donor' %}" method="post">
         {% csrf_token %}
         <div class="form-group">
-            <input class="form-control" autofocus type="text" name="username" placeholder="Username">
+            <input class="form-control" autofocus type="text" name="username" placeholder="Username" required>
         </div>
         <div class="form-group">
-            <input class="form-control" type="email" name="email" placeholder="Email Address">
+            <input class="form-control" type="email" name="email" placeholder="Email Address" required>
         </div>
         <div class="form-group">
-            <input class="form-control" type="text" name="firstname" placeholder="Firstname">
+            <input class="form-control" type="text" name="firstname" placeholder="Firstname" required>
         </div>
         <div class="form-group">
-            <input class="form-control" type="text" name="lastname" placeholder="Lastname">
+            <input class="form-control" type="text" name="lastname" placeholder="Lastname" required>
         </div>
         <div class="form-group">
-            <input class="form-control" type="text" name="street" placeholder="Street">
+            <input class="form-control" type="text" name="street" placeholder="Street" required>
         </div>
         <div class="form-group">
-            <input class="form-control" type="text" name="city" placeholder="City">
+            <input class="form-control" type="text" name="city" placeholder="City" required>
         </div>
         <div class="form-group">
-            <input class="form-control" type="text" name="state" placeholder="State">
+            <input class="form-control" type="text" name="state" placeholder="State" required>
         </div>
         <div class="form-group">
-            <input class="form-control" type="number" name="phone_no" placeholder="Phone Number (Staring with +91)">
+            <input class="form-control" type="number" name="phone_no" placeholder="Phone Number " required>
         </div>
-        <select class="form-control" name="blood_type">
+        <select class="form-control" name="blood_type" required>
             <option selected>Select your Blood Group</option>
             <option value="A+">A+</option>
             <option value="A-">A-</option>
@@ -46,10 +46,10 @@
             <option value="O-">O-</option>
         </select>
         <div class="form-group">
-            <input class="form-control" type="password" name="password" placeholder="Password">
+            <input class="form-control" type="password" name="password" placeholder="Password" required>
         </div>
         <div class="form-group">
-            <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+            <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password" required>
         </div>
         <input class="btn btn-info" type="submit" value="Register">
     </form>
