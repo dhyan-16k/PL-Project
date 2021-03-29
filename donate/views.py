@@ -28,7 +28,7 @@ def index(request):
             "hospitals": User.objects.filter(is_hospital=True)
         })
         
-@login_required
+@login_required(login_url="login")
 def bank(request, bank_name):
     if request.user.is_hospital == True:
         no = DonationPlace.objects.get(name=bank_name)
@@ -49,8 +49,7 @@ def profile(request, name):
         "user1": user
     })
 
-
-@login_required
+@login_required(login_url="login")
 def requests(request):
     if request.method == 'POST':
         city = request.user.city
