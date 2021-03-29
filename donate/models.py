@@ -42,7 +42,7 @@ class BloodRequest(models.Model):
     status = models.CharField(choices=status_choice, max_length=1, default="P")
 
     def __str__(self):
-        return f"{self.id}: {self.hospital}->{self.donor}"
+        return f"{self.hospital}->{self.donor}"
 
 
 class DonationPlace(models.Model):
@@ -90,39 +90,4 @@ class BloodUnit(models.Model):
         return f"{self.blood_bank} | {self.blood_group}"
 
     class Meta :
-        unique_together = ("id", "blood_bank") 
-
-
-"""
-Donors :
-Donor_id
-Name
-Email
-Phone no
-Address (street, area,city)
-Blood_type
- 
-Donation places:
-Name
-Address (street, area,city)
-Phone_no
-email
- 
-Hospitals / recievers :
-Hospital_id
-
-Donation Camps:
-Start date
-End date
-Timing
-
-
-Blood banks (store house)
-
-
-Blood units
-(weak entity ?)
-Blood group
-No of units
- 
-"""
+        unique_together = ("id", "blood_bank")

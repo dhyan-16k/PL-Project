@@ -1,0 +1,22 @@
+{% extends "donate/layout.html" %}
+{% load static %}
+
+{% block title %}Your Profile{% endblock %}
+
+{% block body %}
+    {% if user.is_hospital == True %}
+        <h1>Requests Made</h1>
+    {% else %}
+        <h1>Requests Received</h1>
+    {% endif %}
+    <ul>
+        {% for req in reqs %}
+            <li>{{ req }} (Status = {{ req.status }} )</li>
+        {% endfor %}
+    </ul>
+    
+    {% if user.is_hospital == True %}
+        <button>Make New Request</button>
+    {% endif %}
+
+{% endblock %}

@@ -10,11 +10,16 @@ from django.http import HttpResponseRedirect
 def index(request):
     if request.method == 'POST':
         city = request.POST["search_city"]
-        dp_city = DonationPlace.objects.filter(city=city)
+        if city == 'Select Your City':
+            dp_city = DonationPlace.objects.all()
+            hospitals = User.objects.filter(is_hospital=True)
+        else:
+            dp_city = DonationPlace.objects.filter(city=city)
+            hospitals = User.objects.filter(is_hospital=True, city=city)
         return render(request, "donate/index.html",{
             "camps": DonationCamp.objects.filter(dp_no__in=dp_city),
             "banks": BloodBank.objects.filter(dp_no__in=dp_city),
-            "hospitals": User.objects.filter(is_hospital=True, city=city)
+            "hospitals": hospitals
         })
     else:
         return render(request, "donate/index.html",{
@@ -22,6 +27,27 @@ def index(request):
             "banks": BloodBank.objects.all(),
             "hospitals": User.objects.filter(is_hospital=True)
         })
+
+
+@login_required
+def profile(request):
+    if request.user.is_hospital == False:
+        donations = request.user.donations.all()
+    return render(request, "donate/profile.html", {
+        "donations": donations
+    })
+
+
+@login_required
+def requests(request):
+    if request.user.is_hospital == True:
+        reqs = BloodRequest.objects.filter(hospital=request.user)
+    else:
+        reqs = BloodRequest.objects.filter(donor=request.user)
+    return render(request, "donate/requests.html", {
+        "reqs": reqs
+    })
+
 
 def login_view(request):
     if request.method == "POST":
