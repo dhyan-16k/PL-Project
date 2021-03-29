@@ -1,0 +1,58 @@
+body {
+    /*background-image: url(https://image.freepik.com/free-vector/young-people-standing-talking-each-other-speech-bubble-smartphone-girl-flat-vector-illustration-communication-discussion_74855-8741.jpg);
+    */
+    background-image: url("././images/bg.png");
+    background-size: 100% 100% ;
+}
+
+#Registrationcontainer {
+    margin-left: 100px;
+    margin-right: 0;
+    padding: 0;
+    display: flex;
+    flex-flow: row wrap;
+    /* justify-content: center; */
+
+}
+
+.Registration_tile {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    border : 2px solid grey;
+    border-radius: 20px;
+    padding: 25px;
+    padding-left: 45px;
+    margin: 70px;
+    margin-left: 75px;
+    margin-top: 30px;
+    width: 600px;
+    background-color: white;
+    align-items: center;
+
+}
+
+.registerForm > .form-group > .form-control {
+    width: 500px;
+}
+
+.name > .form-group > .form-control {
+    width: 240px;
+}
+
+#firstname{
+    margin-right: 20px ;
+}
+
+.name {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#Registerimage {
+    width: 45%;
+    height: 45%;
+
+}
+
+#hospitaltile {
+    padding-left: 25px;
+}
