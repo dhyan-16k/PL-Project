@@ -32,9 +32,9 @@ class User(AbstractUser):
 
     def __str__(self):
         if self.is_hospital:
-            return f'Hospital: {self.username}'
-        else:
             return f'{self.username}'
+        else:
+            return f'{self.username} ({self.first_name} {self.last_name})'
 
 
 class BloodRequest(models.Model):
@@ -49,7 +49,7 @@ class BloodRequest(models.Model):
     status = models.CharField(choices=status_choice, max_length=1, default="P")
 
     def __str__(self):
-        return f"{self.hospital}->{self.donor}"
+        return f"{self.hospital} | {self.donor} | {self.donor.blood_type}"
 
 
 class DonationPlace(models.Model):
@@ -68,7 +68,7 @@ class BloodBank(models.Model):
     dp_no = models.OneToOneField(DonationPlace, on_delete=models.CASCADE, related_name="bank")
 
     def __str__(self):
-        return f'Blood Bank {self.id}'
+        return f'{self.dp_no.name}'
 
 
 class DonationCamp(models.Model):
@@ -77,7 +77,7 @@ class DonationCamp(models.Model):
     end_date = models.DateField(auto_now_add=False)
 
     def __str__(self):
-        return f'Donation Camp {self.id}'
+        return f'{self.dp_no.name}'
 
     def save(self, *args, **kwargs):
         if self.end_date >= self.start_date:

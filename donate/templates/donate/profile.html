@@ -9,10 +9,13 @@
 
     <div class="profilecontainer">
 
-    <div class="top">
+        {% if user1.is_hospital == False %}
+            <div class="top top_d">
+        {% else %}
+            <div class="top top_h">
+        {% endif %}
+  
 
-
-   <!--     <h1 class="h1title">Profile Page</h1>-->
         <br>
             {% if user1.is_hospital == False %}
                 <img src="https://image.freepik.com/free-vector/people-donating-blood-background-flat-design_23-2148257793.jpg">
@@ -24,17 +27,15 @@
                 
                 
                 {% if user1.is_hospital == True %}
-                    Hospital Details Kuch daal denge
+                    <!-- div -->
                 {% else %}
-                    <p id="name">{{ user1.first_name }} {{ user1.last_name }}</p>
-                    <p id="group">Blood Group: {{ user1.blood_type }}</p>
-                    <p id="gender">Sex: {{ user1.gender }}</p>
-                    <p id="age">Age: Can't you figure that out from my dob? | I'm a Doctor, not a Mathematician! | {{age}} </p>
-                    
+                    <div id="name">{{ user1.first_name }} {{ user1.last_name }}</div>
+                    <div id="group">Blood Group: {{ user1.blood_type }}</div>
+                    <div id="gender">Sex: {{ user1.gender }}</div>
+                    <div id="age">Age: {{age}} </div>   
                 {% endif %}
 
             </div>
-            
 
     </div>
 
@@ -62,17 +63,13 @@
 
     {% if user1.is_hospital == False %}
     
-
-
             <div class="bottom">
                 <h2>Donations</h2>
-                
-                {% for donation in donations %}
-                    <p style="padding-left: 20px">
-                        {{ donation }} 
-                    </p>
-                {% endfor %} 
-
+                <ul>
+                    {% for donation in donations %}
+                        <li>{{ donation.name }} </li>
+                    {% endfor %} 
+                </ul>
             </div>
     {% endif %}
 

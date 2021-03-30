@@ -13,13 +13,14 @@
     display: flex;
     z-index: -1;
     flex-flow: row wrap;
-    height: 350px;
 }
+
+.top_h{height: 300px;}
+.top_d{height: 350px;}
 
 .top > img {
     border-radius: 50%;
-    width: 14%;
-    height: 63.75%;
+    height: 150px;
     margin-right: 75px ;
 }
 

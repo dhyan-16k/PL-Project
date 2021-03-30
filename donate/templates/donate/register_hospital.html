@@ -23,28 +23,28 @@
         <form action="{% url 'registerOption' option='hospital' %}" method="post">
             {% csrf_token %}
             <div class="form-group">
-                <input class="form-control" autofocus type="text" name="username" placeholder="Hospital Name">
+                <input class="form-control" autofocus type="text" name="username" placeholder="Hospital Name" required>
             </div>
             <div class="form-group">
-                <input class="form-control" type="email" name="email" placeholder="Email Address">
+                <input class="form-control" type="email" name="email" placeholder="Email Address" required>
             </div>
             <div class="form-group">
-                <input class="form-control" type="text" name="street" placeholder="Street">
+                <input class="form-control" type="text" name="street" placeholder="Street" required>
             </div>
             <div class="form-group">
-                <input class="form-control" type="text" name="city" placeholder="City">
+                <input class="form-control" type="text" name="city" placeholder="City" required>
             </div>
             <div class="form-group">
-                <input class="form-control" type="text" name="state" placeholder="State">
+                <input class="form-control" type="text" name="state" placeholder="State" required>
             </div>
             <div class="form-group">
-                <input class="form-control" type="text" name="phone_no" placeholder="Phone Number">
+                <input class="form-control" type="text" name="phone_no" placeholder="Phone Number (10 digit)" required>
             </div>
             <div class="form-group">
-                <input class="form-control" type="password" name="password" placeholder="Password">
+                <input class="form-control" type="password" name="password" placeholder="Password" required>
             </div>
             <div class="form-group">
-                <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+                <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password" required>
             </div>
             <input class="btn btn-info" type="submit" value="Register">
         </form>

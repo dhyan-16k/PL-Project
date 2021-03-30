@@ -147,8 +147,6 @@ def registerOption(request, option):
         street = request.POST["street"]
         city = request.POST["city"]
         state = request.POST["state"]
-        dob = request.POST["dob"]
-        gender = request.POST["gender"]
 
         # Ensure password matches confirmation
         password = request.POST["password"]
@@ -167,6 +165,8 @@ def registerOption(request, option):
             blood_type = request.POST["blood_type"]
             first_name = request.POST["firstname"]
             last_name = request.POST["lastname"]
+            dob = request.POST["dob"]
+            gender = request.POST["gender"]
 
         # Attempt to create new user
         try:
