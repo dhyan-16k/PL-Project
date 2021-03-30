@@ -106,7 +106,7 @@ def registerOption(request, option):
         confirmation = request.POST["confirmation"]
         if password != confirmation:
             if option == "hospital":
-                return render(request, "donte/register_hospital.html", {
+                return render(request, "donate/register_hospital.html", {
                     "message": "Passwords must match."
                 })
             elif option == "donor":

@@ -1,0 +1,41 @@
+
+.profilecontainer {
+ /*   margin: 50px 50px 50px 150px;  /* t r b l*/
+ background-size: contain;
+}
+
+
+
+.top {
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#1D2339), color-stop(50%,#2A3350), color-stop(100%,#4C5B8D ));
+    color: white;
+    padding: 50px 50px 50px 150px;
+    display: flex;
+    z-index: -1;
+    flex-flow: row wrap;
+    height: 350px;
+}
+
+.top > img {
+    border-radius: 50%;
+    width: 14%;
+    height: 63.75%;
+    margin-right: 75px ;
+}
+
+#username {
+    font-size: 50px;
+}
+#name, #group {
+    padding-left: 10px;
+    font-size: 20px;
+}
+.bottom {
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 50px 50px 50px 140px;
+    z-index: 1;
+    margin: -40px 150px 60px 150px; 
+    background-color: white;  
+}
+

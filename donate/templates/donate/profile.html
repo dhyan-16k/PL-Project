@@ -1,29 +1,68 @@
 {% extends "donate/layout.html" %}
-{% load static %}
+
+{%load static%}
+{% block stylelink %} <link href="{% static 'donate/profile.css' %}" rel="stylesheet"> {% endblock %}
 
 {% block title %}Profile Page{% endblock %}
 
 {% block body %}
-    <h1>Profile Page</h1>
-    <h2>{{ user1.username }}</h2>
-    {% if user1.is_hospital == True %}
-        Hospital Details Kuch daal denge
-    {% else %}
-        <h4>{{ user1.first_name }} {{ user1.last_name }}</h3>
-        <h4>Blood Group: {{ user1.blood_type }}</h4>
-    {% endif %}
-    <h3>Address</h3>
-    {{ user1.street }}, {{ user1.city }}, {{ user1.state }}
-    <h3>Contact Details</h3>
-    Email: {{ user1.email }}<br>
-    Phone No: {{ user1.phone_no }}
 
-    {% if user1.is_hospital == False %}
-        <h2>Donations</h2>
-        <ul>
-            {% for donation in donations %}
-                <li>{{ donation }}</li>
-            {% endfor %} 
-        </ul>     
-    {% endif %}
+    <div class="profilecontainer">
+
+    <div class="top">
+
+
+   <!--     <h1 class="h1title">Profile Page</h1>-->
+        <br>
+
+            <img src="https://image.freepik.com/free-vector/people-donating-blood-background-flat-design_23-2148257793.jpg">
+            <div>
+                <p id="username">@{{ user1.username }}</p>
+                
+                
+                {% if user1.is_hospital == True %}
+                    Hospital Details Kuch daal denge
+                {% else %}
+                    <p id="name">{{ user1.first_name }} {{ user1.last_name }}</p>
+                    <p id="group">Blood Group: {{ user1.blood_type }}</p>
+                    
+                {% endif %}
+
+            </div>
+            
+
+    </div>
+
+    <div class="bottom">
+            
+            <h3>Address</h3>
+            <p  style="padding-left: 20px">
+                {{ user1.street }} <br> {{ user1.city }} <br> {{ user1.state }}
+            </p>
+            <br><br>
+            
+            <h3>Contact Details</h3>
+            <p style="padding-left: 20px">
+                <strong>Email: </strong> <br> <p style="padding-left:40px "> {{ user1.email }}<br> </p>
+                <strong  style="padding-left: 20px">Phone No:</strong> <br> <p style="padding-left:40px "> {{ user1.phone_no }} </p>
+            </p>
+
+    </div>
+
+    <div class="bottom">
+
+
+            {% if user1.is_hospital == False %}
+                <h2>Donations</h2>
+                
+                {% for donation in donations %}
+                    <p style="padding-left: 20px">
+                        {{ donation }} 
+                    </p>
+                {% endfor %} 
+                
+            {% endif %}
+
+
+    </div>
 {% endblock %}
