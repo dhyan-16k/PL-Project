@@ -14,8 +14,11 @@
 
    <!--     <h1 class="h1title">Profile Page</h1>-->
         <br>
-
-            <img src="https://image.freepik.com/free-vector/people-donating-blood-background-flat-design_23-2148257793.jpg">
+            {% if user1.is_hospital == False %}
+                <img src="https://image.freepik.com/free-vector/people-donating-blood-background-flat-design_23-2148257793.jpg">
+            {% else %}
+                <img src="https://image.freepik.com/free-vector/hospital-building-ambulance_260807-282.jpg">
+            {% endif %}
             <div>
                 <p id="username">@{{ user1.username }}</p>
                 
@@ -39,20 +42,21 @@
             <p  style="padding-left: 20px">
                 {{ user1.street }} <br> {{ user1.city }} <br> {{ user1.state }}
             </p>
-            <br><br>
+            <br>
             
             <h3>Contact Details</h3>
             <p style="padding-left: 20px">
-                <strong>Email: </strong> <br> <p style="padding-left:40px "> {{ user1.email }}<br> </p>
+                <strong>Email: </strong>  <p style="padding-left:40px "> {{ user1.email }}<br> </p>
                 <strong  style="padding-left: 20px">Phone No:</strong> <br> <p style="padding-left:40px "> {{ user1.phone_no }} </p>
             </p>
 
     </div>
 
-    <div class="bottom">
+    {% if user1.is_hospital == False %}
+    
 
 
-            {% if user1.is_hospital == False %}
+            <div class="bottom">
                 <h2>Donations</h2>
                 
                 {% for donation in donations %}
@@ -60,9 +64,10 @@
                         {{ donation }} 
                     </p>
                 {% endfor %} 
-                
-            {% endif %}
 
+            </div>
+    {% endif %}
 
     </div>
+
 {% endblock %}

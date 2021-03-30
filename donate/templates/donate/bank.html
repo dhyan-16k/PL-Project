@@ -1,22 +1,63 @@
 {% extends "donate/layout.html" %}
-{% load static %}
+
+{%load static%}
+{% block stylelink %} <link href="{% static 'donate/profile.css' %}" rel="stylesheet"> {% endblock %}
 
 {% block title %}Blood Bank{% endblock %}
 
 {% block body %}
-    <h1>Blood Bank Page</h1>
-    <h2>{{ bank }}</h2><hr>
 
-    <h3>Blood Units Available</h3>
-    <ul>
-        {% for unit in units %}
-            <li>{{ unit.blood_group }} | {{ unit.no_of_units }}</li>
-        {% endfor %}
-    </ul>
-    
-    <hr><h3>Address</h3>
-    
-    {{ bank.dp_no.street }}, {{ bank.dp_no.city }}, {{ bank.dp_no.state }}
-    <h3>Contact Details</h3>
-    Phone No: {{ bank.dp_no.phone_no }}
+    <div class="profilecontainer">
+
+    <div class="top">
+
+
+   <!--     <h1 class="h1title">Profile Page</h1>-->
+        <br>
+
+            <img src="https://image.freepik.com/free-vector/blood-donor-nurse_74855-6262.jpg">
+            <div>
+
+                    <p id="username">{{ bank }}<p>
+                    Phone No: {{ bank.dp_no.phone_no }}
+            </div>
+
+    </div>
+
+    <div class="bottom">
+
+            <h3>Blood Units Available</h3>
+
+            <table class="table table-hover">
+            <tr>
+                <th scope="col">Blood type</th>
+                <th scope="col">No of units</th>
+            </tr>
+                {% for unit in units %}
+                    <tr>
+                        <td>{{ unit.blood_group }}</td>
+                        <td>{{ unit.no_of_units }}</td>
+                    </tr>      
+                {% endfor %}
+            </table>
+
+    </div>
+
+    <div class="bottom">
+            <h3>Address</h3>
+            <p  style="padding-left: 20px">
+                {{ bank.dp_no.street }}, <br> {{ bank.dp_no.city }}, <br> {{ bank.dp_no.state }}
+            </p> 
+            <br>
+            <h3>Contact Details</h3>
+            <p >
+                <strong  style="padding-left: 20px">Phone No:</strong>
+                <p style="padding-left:40px "> {{ bank.dp_no.phone_no }} </p>
+            </p> 
+
+
+    </div>
+
+    </div>
+
 {% endblock %}
