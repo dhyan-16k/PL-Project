@@ -4,49 +4,50 @@
 {% block title %}Blood Donation{% endblock %}
 
 {% block body %}
+    <div class="container-sm">
+        <form action="{% url 'index' %}" method="POST">
+            {% csrf_token %}
+            <label>Search Donation places in your City</label>
+            <select class="form-control" aria-label="Search City" name="search_city">
+                <option selected>Select Your City</option>
+                <option value="Andheri">Andheri</option>
+                <option value="Borivali">Borivali</option>
+                <option value="Dadar">Dadar</option>
+                <option value="Goregaon">Goregaon</option>
+                <option value="Kandivali">Kandivali</option>
+                <option value="Mira Road">Mira Road</option>
+                <option value="Santacruz">Santacruz</option>
+                <option value="Vile Parle">Vile Parle</option> 
+            </select>
+            <button type="submit" class="btn btn-info">Search</button>
+        </form>
+        <h1>Donation Camps</h1>
+        <ul>
+            {% for camp in camps %}
+                {% if camp.end_date >= today %}
+                    <li>
+                        {{ camp }} | {{ camp.start_date }} - {{ camp.end_date }} |
+                        Address : {{ camp.dp_no.street }}, {{ camp.dp_no.city }}, {{ camp.dp_no.state }}
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
     
-    <form action="{% url 'index' %}" method="POST">
-        {% csrf_token %}
-        <label>Search Donation places in your City</label>
-        <select class="form-control" aria-label="Search City" name="search_city">
-            <option selected>Select Your City</option>
-            <option value="Andheri">Andheri</option>
-            <option value="Borivali">Borivali</option>
-            <option value="Dadar">Dadar</option>
-            <option value="Goregaon">Goregaon</option>
-            <option value="Kandivali">Kandivali</option>
-            <option value="Mira Road">Mira Road</option>
-            <option value="Santacruz">Santacruz</option>
-            <option value="Vile Parle">Vile Parle</option> 
-        </select>
-        <button type="submit" class="btn btn-info">Search</button>
-    </form>
-    <h1>Donation Camps</h1>
-    <ul>
-        {% for camp in camps %}
-            {% if camp.end_date >= today %}
-                <li>
-                    {{ camp }} | {{ camp.start_date }} - {{ camp.end_date }} |
-                    Address : {{ camp.dp_no.street }}, {{ camp.dp_no.city }}, {{ camp.dp_no.state }}
-                </li>
-            {% endif %}
-        {% endfor %}
-    </ul>
-    
-    <hr>
-    <h1>Blood Banks</h1>
-    <ul>
-        {% for bank in banks %}
-            <li><a href="{% url 'bank' bank_name=bank.dp_no.name %}"> {{ bank }} </a></li>
-        {% endfor %}
-    </ul>
-    
-    <hr>
-    <h1>Hospitals</h1>
-    <ul>
-        {% for hosp in hospitals %}
-            <li> <a href="{% url 'profile' name=hosp.username %}"> {{ hosp }} </a></li>
-        {% endfor %}
-    </ul> 
-    <hr>
+        <hr>
+        <h1>Blood Banks</h1>
+        <ul>
+            {% for bank in banks %}
+                <li><a href="{% url 'bank' bank_name=bank.dp_no.name %}"> {{ bank }} </a></li>
+            {% endfor %}
+        </ul>
+        
+        <hr>
+        <h1>Hospitals</h1>
+        <ul>
+            {% for hosp in hospitals %}
+                <li> <a href="{% url 'profile' name=hosp.username %}"> {{ hosp }} </a></li>
+            {% endfor %}
+        </ul> 
+        <hr>   
+    </div>
 {% endblock %}
