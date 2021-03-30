@@ -5,30 +5,25 @@
 
 {% block body %}
     {% if user.is_hospital == True %}
-        <h1>Requests Made</h1>
-    {% else %}
-        <h1>Requests Received</h1>
-    {% endif %}
-    <ul>
-        {% for req in reqs %}
-            <li>
-                <a href="{% url 'profile' name=req.hospital.username %}">{{ req.hospital }}</a> |
-                <a href="{% url 'profile' name=req.donor.username %}">{{ req.donor }}</a> |
-                {{ req.date }} |
-                (Status = {{ req.status }} )
 
-                {% if user.is_hospital == False and req.status == 'P' and today == req.date %}
-                    <button class="btn-sm btn-primary">Accept</button>
-                    <button class="btn-sm btn-primary">Deny</button>
+        <hr><h2>Today's Accepted Requests</h2>
+        <ul>
+            {% for req in reqs %}
+                {% if req.status == 'A' and today == req.date %}
+                    <li>
+                        <a href="{% url 'profile' name=req.hospital.username %}">{{ req.hospital }}</a> |
+                        <a href="{% url 'profile' name=req.donor.username %}">{{ req.donor }}</a> |
+                        {{ req.date }} |
+                        (Status = {{ req.status }} )   
+                    </li>
+                    <hr>
                 {% endif %}
-            </li>
-            <hr>
-        {% endfor %}
-    </ul>
+                
+            {% endfor %}
+        </ul><hr>
 
-    {% if user.is_hospital == True %}
         <h2>Make New Request</h2>
-        <hr>Makes a request to all the donors in the city with Particualr Blood Type<hr>
+        Makes a request to all the donors in the city with Particualr Blood Type
         <form action="{% url 'requests' %}" method="POST">
             {% csrf_token %}
             <select class="form-control" name="blood_req_type" required>
@@ -43,7 +38,37 @@
             </select>
             <input class="btn btn-info" type="submit" value="Make Request">
         </form>
-        
+        <hr>
     {% endif %}
+
+    {% if user.is_hospital == True %}
+        <h1>ALl Requests Made</h1>
+    {% else %}
+        <h1>Requests Received</h1>
+    {% endif %}
+    <ul>
+        {% for req in reqs %}
+            <li>
+                <a href="{% url 'profile' name=req.hospital.username %}">{{ req.hospital }}</a> |
+                <a href="{% url 'profile' name=req.donor.username %}">{{ req.donor }}</a> |
+                {{ req.date }} |
+                (Status = {{ req.status }} )
+
+                {% if user.is_hospital == False and req.status == 'P' and today == req.date %}
+                    <form action="{% url 'response' id=req.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-sm btn-primary" name="accept">Accept</button>
+                    </form>
+                    <form action="{% url 'response' id=req.id  %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-sm btn-primary" name="deny">Deny</button>
+                    </form>
+                    
+                {% endif %}
+
+            </li>
+            <hr>
+        {% endfor %}
+    </ul>
 
 {% endblock %}

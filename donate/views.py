@@ -89,6 +89,30 @@ def requests(request):
             "today": date.today()
         })
 
+
+@login_required(login_url="login")
+def response(request, id):
+    if request.method =='POST':
+        req = BloodRequest.objects.get(id=id)
+        
+        if 'accept' in request.POST:
+            req.status = 'A'
+        elif 'deny' in request.POST:
+            req.status = 'D'
+        req.save()
+        
+        if request.user.is_hospital == True:
+            reqs = BloodRequest.objects.filter(hospital=request.user)
+        else:
+            reqs = BloodRequest.objects.filter(donor=request.user)
+
+        return render(request, "donate/requests.html", {
+            "reqs": reqs,
+            "today": date.today()
+        })
+    else:
+        return HttpResponseRedirect(reverse('requests'))
+
 def login_view(request):
     if request.method == "POST":
 
