@@ -11,19 +11,32 @@ from datetime import date
 def index(request):
     today = date.today()
     if request.method == 'POST':
-        city = request.POST["search_city"]
-        if city == 'Select Your City':
-            dp_city = DonationPlace.objects.all()
-            hospitals = User.objects.filter(is_hospital=True)
-        else:
-            dp_city = DonationPlace.objects.filter(city=city)
-            hospitals = User.objects.filter(is_hospital=True, city=city)
-        return render(request, "donate/index.html",{
-            "camps": DonationCamp.objects.filter(dp_no__in=dp_city),
-            "banks": BloodBank.objects.filter(dp_no__in=dp_city),
-            "hospitals": hospitals,
-            "today": today
-        })
+        if 'city_search' in request.POST:
+            city = request.POST["search_city"]
+            if city == 'Select Your City':
+                dp_city = DonationPlace.objects.all()
+                hospitals = User.objects.filter(is_hospital=True)
+            else:
+                dp_city = DonationPlace.objects.filter(city=city)
+                hospitals = User.objects.filter(is_hospital=True, city=city)
+            return render(request, "donate/index.html",{
+                "camps": DonationCamp.objects.filter(dp_no__in=dp_city),
+                "banks": BloodBank.objects.filter(dp_no__in=dp_city),
+                "hospitals": hospitals,
+                "today": today
+            })
+        elif 'blood_search' in request.POST:
+            blood_type = request.POST['blood_bank_type']
+            rows = BloodUnit.objects.filter(blood_group=blood_type)
+            return render(request, "donate/index.html",{
+                "camps": DonationCamp.objects.all(),
+                "banks": BloodBank.objects.all(),
+                "hospitals": User.objects.filter(is_hospital=True),
+                "today": today,
+                "table": True,
+                "rows": rows,
+                "blood_group": blood_type
+            })
     else:
         return render(request, "donate/index.html",{
             "camps": DonationCamp.objects.all(),
@@ -48,9 +61,14 @@ def bank(request, bank_name):
 def profile(request, name):
     user = User.objects.get(username=name)
     donations = user.donations.all()
+    today = date.today()
+    age = 0
+    if user.is_hospital == False:
+        age = today.year - user.dob.year - ((today.month, today.day) < (user.dob.month, user.dob.day))
     return render(request, "donate/profile.html", {
         "donations": donations,
-        "user1": user
+        "user1": user,
+        "age": age
     })
 
 @login_required(login_url="login")
@@ -105,6 +123,8 @@ def registerOption(request, option):
         street = request.POST["street"]
         city = request.POST["city"]
         state = request.POST["state"]
+        dob = request.POST["dob"]
+        gender = request.POST["gender"]
 
         # Ensure password matches confirmation
         password = request.POST["password"]
@@ -135,6 +155,8 @@ def registerOption(request, option):
                 user.first_name = first_name
                 user.last_name = last_name
                 user.blood_type = blood_type
+                user.dob = dob
+                user.gender = gender
                 user.is_hospital = False
             elif option == "hospital":
                 user.is_hospital = True

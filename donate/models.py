@@ -15,12 +15,19 @@ unit_choices = [
 ]
 
 class User(AbstractUser):
+    gender_choice = [
+        ("M", "Male"),
+        ("F", "Female"),
+        ("O", "Other")
+    ]
     is_hospital = models.BooleanField(default = False)
     street = models.CharField (max_length=64)
     city = models.CharField (max_length=64)
     state = models.CharField (max_length=64)
     phone_no = PhoneNumberField(unique=True)
+    dob = models.DateField(auto_now_add=False, blank=True, null=True)
     blood_type = models.CharField(choices=unit_choices, max_length=64, blank=True)
+    gender = models.CharField(choices=gender_choice, max_length=1, blank=True)
     requests = models.ManyToManyField("User", blank=True, through="BloodRequest")
 
     def __str__(self):

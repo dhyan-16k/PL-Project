@@ -19,7 +19,7 @@
                 <option value="Santacruz">Santacruz</option>
                 <option value="Vile Parle">Vile Parle</option> 
             </select>
-            <button type="submit" class="btn btn-info">Search</button>
+            <button type="submit" name="city_search" class="btn btn-info">Search</button>
         </form>
         <h1>Donation Camps</h1>
         <ul>
@@ -49,5 +49,41 @@
             {% endfor %}
         </ul> 
         <hr>   
+    
+
+        {% if user.is_hospital == True %}
+            <h2>Search Blood Units</h2>
+            <form action="{% url 'index' %}" method="POST">
+                {% csrf_token %}
+                <select class="form-control" name="blood_bank_type" required>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                </select>
+                <button type="submit" name="blood_search" class="btn btn-info">Search</button>
+            </form>
+            {% if table %}
+                Number of units of Blood Type {{ blood_group }} 
+                <table style="padding: 10px; border: 2px solid black;">
+                    <tr>
+                        <th>Blood Bank</th>
+                        <th>City</th>
+                        <th>Number of Units</th>
+                    </tr>
+                    {% for row in rows %}
+                    <tr>
+                        <td><a href="{% url 'bank' bank_name=row.blood_bank.dp_no.name %}">{{ row.blood_bank.dp_no.name }}</a></td>
+                        <td>{{ row.blood_bank.dp_no.city }}</td>
+                        <td>{{ row.no_of_units  }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            {% endif %}
+        {% endif %}
     </div>
 {% endblock %}

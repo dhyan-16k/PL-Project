@@ -26,7 +26,7 @@
 #username {
     font-size: 50px;
 }
-#name, #group {
+#name, #group, #gender, #age {
     padding-left: 10px;
     font-size: 20px;
 }

@@ -28,6 +28,8 @@
                 {% else %}
                     <p id="name">{{ user1.first_name }} {{ user1.last_name }}</p>
                     <p id="group">Blood Group: {{ user1.blood_type }}</p>
+                    <p id="gender">Sex: {{ user1.gender }}</p>
+                    <p id="age">Age: Can't you figure that out from my dob? | I'm a Doctor, not a Mathematician! | {{age}} </p>
                     
                 {% endif %}
 
@@ -37,18 +39,24 @@
     </div>
 
     <div class="bottom">
-            
-            <h3>Address</h3>
+        {% if user1.is_hospital == False %}
+            <h3>Date of Birth</h3>
             <p  style="padding-left: 20px">
-                {{ user1.street }} <br> {{ user1.city }} <br> {{ user1.state }}
-            </p>
+                {{ user1.dob }}
             <br>
-            
-            <h3>Contact Details</h3>
-            <p style="padding-left: 20px">
-                <strong>Email: </strong>  <p style="padding-left:40px "> {{ user1.email }}<br> </p>
-                <strong  style="padding-left: 20px">Phone No:</strong> <br> <p style="padding-left:40px "> {{ user1.phone_no }} </p>
-            </p>
+        {% endif %}
+        
+        <h3>Address</h3>
+        <p  style="padding-left: 20px">
+            {{ user1.street }} <br> {{ user1.city }} <br> {{ user1.state }}
+        </p>
+        <br>
+        
+        <h3>Contact Details</h3>
+        <p style="padding-left: 20px">
+            <strong>Email: </strong>  <p style="padding-left:40px "> {{ user1.email }}<br> </p>
+            <strong  style="padding-left: 20px">Phone No:</strong> <br> <p style="padding-left:40px "> {{ user1.phone_no }} </p>
+        </p>
 
     </div>
 
