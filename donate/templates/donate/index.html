@@ -24,10 +24,12 @@
     <h1>Donation Camps</h1>
     <ul>
         {% for camp in camps %}
-            <li>
-                {{ camp }} | {{ camp.start_date }} - {{ camp.end_date }} |
-                Address : {{ camp.dp_no.street }}, {{ camp.dp_no.city }}, {{ camp.dp_no.state }}
-            </li>
+            {% if camp.end_date >= today %}
+                <li>
+                    {{ camp }} | {{ camp.start_date }} - {{ camp.end_date }} |
+                    Address : {{ camp.dp_no.street }}, {{ camp.dp_no.city }}, {{ camp.dp_no.state }}
+                </li>
+            {% endif %}
         {% endfor %}
     </ul>
     

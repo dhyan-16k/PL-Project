@@ -14,9 +14,15 @@
             <li>
                 <a href="{% url 'profile' name=req.hospital.username %}">{{ req.hospital }}</a> |
                 <a href="{% url 'profile' name=req.donor.username %}">{{ req.donor }}</a> |
+                {{ req.date }} |
                 (Status = {{ req.status }} )
-            </li>
 
+                {% if user.is_hospital == False and req.status == 'P' and today == req.date %}
+                    <button class="btn-sm btn-primary">Accept</button>
+                    <button class="btn-sm btn-primary">Deny</button>
+                {% endif %}
+            </li>
+            <hr>
         {% endfor %}
     </ul>
 

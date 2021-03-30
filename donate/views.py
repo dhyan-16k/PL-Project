@@ -5,9 +5,11 @@ from django.db import IntegrityError
 from django.urls import reverse
 from .models import *
 from django.http import HttpResponseRedirect
+from datetime import date
 # Create your views here.
 
 def index(request):
+    today = date.today()
     if request.method == 'POST':
         city = request.POST["search_city"]
         if city == 'Select Your City':
@@ -19,13 +21,15 @@ def index(request):
         return render(request, "donate/index.html",{
             "camps": DonationCamp.objects.filter(dp_no__in=dp_city),
             "banks": BloodBank.objects.filter(dp_no__in=dp_city),
-            "hospitals": hospitals
+            "hospitals": hospitals,
+            "today": today
         })
     else:
         return render(request, "donate/index.html",{
             "camps": DonationCamp.objects.all(),
             "banks": BloodBank.objects.all(),
-            "hospitals": User.objects.filter(is_hospital=True)
+            "hospitals": User.objects.filter(is_hospital=True),
+            "today": today
         })
         
 @login_required(login_url="login")
@@ -63,7 +67,8 @@ def requests(request):
         reqs = BloodRequest.objects.filter(donor=request.user)
 
     return render(request, "donate/requests.html", {
-            "reqs": reqs
+            "reqs": reqs,
+            "today": date.today()
         })
 
 def login_view(request):
