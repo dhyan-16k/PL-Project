@@ -9,6 +9,7 @@
         <hr><h2>Today's Accepted Requests</h2>
         <ul>
             {% for req in reqs %}
+            
                 {% if req.status == 'A' and today == req.date %}
                     <li>
                         <a href="{% url 'profile' name=req.hospital.username %}">{{ req.hospital }}</a> |
@@ -18,6 +19,8 @@
                     </li>
                     <hr>
                 {% endif %}
+            {% empty %}
+                <li>No Entries Found</li>    
                 
             {% endfor %}
         </ul><hr>
@@ -39,12 +42,38 @@
             <input class="btn btn-info" type="submit" value="Make Request">
         </form>
         <hr>
+    {% else %} 
+    <h1>Latest Requests Received</h1>
+    <ul>
+        {% for req in reqs %}
+            {% if user.is_hospital == False and req.status == 'P' and today == req.date %}
+                <li>
+                    <a href="{% url 'profile' name=req.hospital.username %}">{{ req.hospital }}</a> |
+                    <a href="{% url 'profile' name=req.donor.username %}">{{ req.donor }}</a> |
+                    {{ req.date }} |
+                    (Status = {{ req.status }} )
+
+                    <form action="{% url 'response' id=req.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-sm btn-primary" name="accept">Accept</button>
+                    </form>
+                    <form action="{% url 'response' id=req.id  %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-sm btn-primary" name="deny">Deny</button>
+                    </form>
+                </li>
+                <hr>       
+            {% endif %}
+        {% empty %}
+            <li>No Entries Found</li> 
+        {% endfor %}
+    </ul>
     {% endif %}
 
     {% if user.is_hospital == True %}
         <h1>ALl Requests Made</h1>
     {% else %}
-        <h1>Requests Received</h1>
+        <h1>All Requests</h1>
     {% endif %}
     <ul>
         {% for req in reqs %}
@@ -68,7 +97,9 @@
 
             </li>
             <hr>
+        {% empty %}
+            <li>No Entries Found</li>
+            <hr>
         {% endfor %}
     </ul>
-
 {% endblock %}

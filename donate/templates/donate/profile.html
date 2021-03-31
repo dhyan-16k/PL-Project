@@ -68,6 +68,8 @@
                 <ul>
                     {% for donation in donations %}
                         <li>{{ donation.name }} </li>
+                    {% empty %}
+                        <li>No Entries Found</li>
                     {% endfor %} 
                 </ul>
             </div>

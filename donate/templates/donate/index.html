@@ -30,6 +30,8 @@
                         Address : {{ camp.dp_no.street }}, {{ camp.dp_no.city }}, {{ camp.dp_no.state }}
                     </li>
                 {% endif %}
+            {% empty %}
+                <li>No Entries Found</li>
             {% endfor %}
         </ul>
     
@@ -38,6 +40,8 @@
         <ul>
             {% for bank in banks %}
                 <li><a href="{% url 'bank' bank_name=bank.dp_no.name %}"> {{ bank }} </a></li>
+            {% empty %}
+                <li>No Entries Found</li>
             {% endfor %}
         </ul>
         
@@ -46,6 +50,8 @@
         <ul>
             {% for hosp in hospitals %}
                 <li> <a href="{% url 'profile' name=hosp.username %}"> {{ hosp }} </a></li>
+            {% empty %}
+                <li>No Entries Found</li>
             {% endfor %}
         </ul> 
         <hr>   
@@ -81,6 +87,8 @@
                         <td>{{ row.blood_bank.dp_no.city }}</td>
                         <td>{{ row.no_of_units  }}</td>
                     </tr>
+                    {% empty %}
+                    <hr>No Entries Found</hr>
                     {% endfor %}
                 </table>
             {% endif %}

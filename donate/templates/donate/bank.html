@@ -35,7 +35,9 @@
                     <tr>
                         <td>{{ unit.blood_group }}</td>
                         <td>{{ unit.no_of_units }}</td>
-                    </tr>      
+                    </tr>
+                {% empty %}
+                    <hr>No Entries Found<hr>  
                 {% endfor %}
             </table>
 
