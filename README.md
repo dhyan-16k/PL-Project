@@ -8,7 +8,7 @@ This is a repo for our PL project - Blood Donation System for semester 4
 ### Members 
   - [Pratham Jajodia](https://github.com/Pratham-01)
   - [Pushpit Jain](https://github.com/pushpit-J19)
-  - [Dhyan Kundhadhia](https://github.com/dhyan-16k)
+  - [Dhyan Kundhadia](https://github.com/dhyan-16k)
  
  
 ### To run this project
